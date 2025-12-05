@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple To-Do</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    li { cursor: pointer; margin: 8px 0; }
+    .done { text-decoration: line-through; color: gray; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>To-Do List</h2>
+
+  <input id="itemInput" placeholder="Add item..." />
+  <button onclick="addItem()">Add</button>
+
+  <ul id="list"></ul>
+
+  <script>
+    function addItem() {
+      const text = document.getElementById("itemInput").value.trim();
+      if (!text) return;
+
+      const li = document.createElement("li");
+      li.textContent = text;
+
+      // Strike on click
+      li.onclick = function () {
+        li.classList.toggle("done");
+      };
+
+      // Delete button
+      const del = document.createElement("button");
+      del.textContent = "Delete";
+      del.onclick = function (e) {
+        li.remove();
+      };
+
+      li.appendChild(del);
+      document.getElementById("list").appendChild(li);
+      document.getElementById("itemInput").value = "";
+    }
+  </script>
+
+</body>
+</html>
